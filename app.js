@@ -5,6 +5,7 @@ import express from 'express';
 import userRouter from './src/routes/user.route.js';
 import cookieParser from 'cookie-parser';
 import cartRouter from './src/routes/cart.route.js';
+import recommendationRouter from './src/routes/recommendation.route.js';
 configDotenv();
 
 const app = express();
@@ -26,4 +27,6 @@ app.use('/api/v1/auth', userRouter);
 import postRouter from './src/routes/post.route.js';
 app.use('/api/v1/post', postRouter);
 app.use('/api/v1/cart', cartRouter);
+app.use('/api/v1/recommendation', recommendationRouter);
+
 export default app;
