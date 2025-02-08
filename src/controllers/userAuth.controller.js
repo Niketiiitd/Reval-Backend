@@ -8,14 +8,14 @@ export const signUp = asyncHandler(async (req, res, next) => {
     const { username, email, password, address } = req.body;
     console.log(req.body);
 
-    if (!username || !email || !password || !address) {
+    if (!username || !email || !password ) {
         return next(new ApiError(400, "All fields are required"));
     }
 
     if (typeof username !== 'string' || username.trim() === "" ||
         typeof email !== 'string' || email.trim() === "" ||
-        typeof password !== 'string' || password.trim() === "" ||
-        typeof address !== 'object' || !address.street || !address.city || !address.state) {
+        typeof password !== 'string' || password.trim() === "" ){
+        // typeof address !== 'object' || !address.street || !address.city || !address.state) {
         return next(new ApiError(400, "All fields are required and must be valid"));
     }
 

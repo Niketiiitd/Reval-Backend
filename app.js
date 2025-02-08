@@ -1,17 +1,20 @@
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { config as configDotenv } from 'dotenv';
 import express from 'express';
-import userRouter from './src/routes/user.route.js';
-import cookieParser from 'cookie-parser';
 import cartRouter from './src/routes/cart.route.js';
 import recommendationRouter from './src/routes/recommendation.route.js';
+import userRouter from './src/routes/user.route.js';
 configDotenv();
+
 
 const app = express();
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
+    credentials: true,
+
 }));
 
 app.use(cookieParser());
