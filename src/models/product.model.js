@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import AutoIncrement from 'mongoose-sequence';
+import AutoIncrementFactory from 'mongoose-sequence';
+const AutoIncrement = AutoIncrementFactory(mongoose);
 
 const ProductSchema = new Schema({
     productId: {
