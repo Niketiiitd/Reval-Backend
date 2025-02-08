@@ -1,5 +1,5 @@
 import express from "express";
-import { commentPost, createPost, deletePost, editPost, getAllPost, getPost, likePost } from "../controllers/post.controller.js";
+import { commentPost, createPost, deletePost, editPost, getAllPost, getPost, likePost, findPostsByTags } from "../controllers/post.controller.js";
 import verifyUserJWT from '../middlewares/auth.middleware.js';
 import { upload } from '../middlewares/multer.middleware.js';
 const router =express.Router();
@@ -28,5 +28,6 @@ router.route("/").get(getAllPost)
 router.route("/add-comment/:id").post(verifyUserJWT,commentPost)
 // like a post
 router.route("/like-post/:id").post(verifyUserJWT,likePost)
-
+// find posts by tags
+router.route("/find-by-tags").post(findPostsByTags);
 export default router;
