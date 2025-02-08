@@ -125,4 +125,14 @@ const commentPost = async (req, res) => {
     }
 };
 
-export { createPost, getPost, editPost, getAllPost, deletePost, likePost, commentPost };
+const findPostsByTags = async (req, res) => {
+    try {
+        const { tags } = req.body;
+        const posts = await Post.find({ tags: { $in: tags } }).populate('author').sort({ createdAt: -1 });
+        res.status(200).json(posts);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export { createPost, getPost, editPost, getAllPost, deletePost, likePost, commentPost, findPostsByTags };
