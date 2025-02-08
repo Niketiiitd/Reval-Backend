@@ -73,13 +73,12 @@ const editPost = async (req, res) => {
 
 const getAllPost = async (req, res) => {
     try {
-        const posts = await Post.find().populate('author');
+        const posts = await Post.find().populate('author').sort({ createdAt: -1 });
         res.status(200).json(posts);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
-
 const deletePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
