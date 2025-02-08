@@ -1,49 +1,35 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
-
-const PostSchema = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true
+const commentSchema = new mongoose.Schema({
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, 
+    // user: { type: Number, required: true }, //dummy for testing 
+    authorName :{
+        type :String ,
     },
+    text: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now }
+});
+
+const postSchema = new mongoose.Schema({
     content: {
         type: String,
         required: true,
-        trim: true
     },
-    images: [{
-        type: String
-    }],
-    likes: [{
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    }],
-    comments: [{
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-        },
-        content: {
-            type: String,
-            required: true
-        },
-        timestamp: {
-            type: Date,
-            default: Date.now
-        }
-    }],
-    shares: [{
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    }],
-    timestamp: {
-        type: Date,
-        default: Date.now
-    }
-});
+    tags: {
+        type: [String],
+        required: true,
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId, // Reference to User model
+        ref: "User",
+    }, 
+    image: {
+        type: String, // URL or path
+    },
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // Array of user IDs who liked the post
+    comments: [commentSchema], // Embedded comments array
 
-const Post = mongoose.model('Post', PostSchema);
+}, { timestamps: true });
 
-export default Post;
+export const Post= mongoose.model("Post", postSchema);
+export const Comment= mongoose.model("Comment", commentSchema);
