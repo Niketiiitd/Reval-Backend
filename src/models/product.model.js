@@ -1,12 +1,6 @@
-import mongoose, { Schema } from "mongoose";
-import AutoIncrementFactory from 'mongoose-sequence';
-const AutoIncrement = AutoIncrementFactory(mongoose);
+import { Schema } from "mongoose";
 
 const ProductSchema = new Schema({
-    productId: {
-        type: Number,
-        unique: true
-    },
     name: {
         type: String,
         required: true,
@@ -81,9 +75,4 @@ const ProductSchema = new Schema({
     }]
 });
 
-// Add auto-incrementing ID field
-ProductSchema.plugin(AutoIncrement, { inc_field: 'productId' });
-
-const Product = mongoose.model('Product', ProductSchema);
-
-export default Product;
+export default ProductSchema;
