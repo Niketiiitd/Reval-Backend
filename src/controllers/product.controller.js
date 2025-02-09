@@ -153,3 +153,19 @@ export const deleteProduct = async (req, res) => {
     });
   }
 };
+
+/**
+ * fetch transaction history of a product.
+ */
+export const getTransactionHistory = async (req, res) => {
+  try {
+    const transactions = await Transaction.find({ productId: req.params.id });
+    return res.status(200).json({ success: true, transactions });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Error fetching transaction history',
+      error: error.message,
+    });
+  }
+}
