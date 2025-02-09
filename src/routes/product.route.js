@@ -4,7 +4,8 @@ import {
   getProductById,
   getAllProducts,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  getTransactionHistory
 } from '../controllers/product.controller.js';
 import verifyUserJWT from '../middlewares/auth.middleware.js';
 
@@ -24,5 +25,7 @@ router.route('/:id').put(verifyUserJWT, updateProduct);
 
 // Delete a product
 router.route('/:id').delete(verifyUserJWT, deleteProduct);
+
+route('/:id').get(getTransactionHistory);
 
 export default router;
