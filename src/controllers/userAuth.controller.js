@@ -14,10 +14,11 @@ export const signUp = asyncHandler(async (req, res, next) => {
 
     if (typeof username !== 'string' || username.trim() === "" ||
         typeof email !== 'string' || email.trim() === "" ||
-        typeof password !== 'string' || password.trim() === "" ||
-        typeof address !== 'object' || !address.street || !address.city || !address.state) {
+        typeof password !== 'string' || password.trim() === "" 
+        ) {
         return next(new ApiError(400, "All fields are required and must be valid"));
     }
+ 
 
     const userExists = await User.findOne({ email });
     if (userExists) {
