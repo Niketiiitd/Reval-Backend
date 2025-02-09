@@ -13,7 +13,7 @@ export const createProduct = async (req, res) => {
       link,
       images,
       bills,
-      currentOwner,
+      currentOwner = req._id,
     } = req.body;
 
     const newProduct = new Product({
