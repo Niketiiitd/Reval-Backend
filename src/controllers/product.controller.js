@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import Product from '../models/product.model.js';
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 export const createProduct = async (req, res) => {
   try {
@@ -11,26 +10,12 @@ export const createProduct = async (req, res) => {
       discountPrice,
       actualPrice,
       link,
+      images,
       bills,
       currentOwner,
       noOfRatings,
       rating,
     } = req.body;
-
-    const uploadedImages = [];
-
-    if (req.files?.images) {
-      for (const file of req.files.images) {
-        const result = await uploadOnCloudinary(file.path);
-        if (!result) {
-          return res.status(500).json({
-            success: false,
-            message: 'Error uploading images',
-          });
-        }
-        uploadedImages.push(result.secure_url);
-      }
-    }
 
     const newProduct = new Product({
       name,
@@ -39,7 +24,7 @@ export const createProduct = async (req, res) => {
       discountPrice,
       actualPrice,
       link,
-      images: uploadedImages, // Save uploaded image URLs
+      images,
       bills,
       currentOwner: new mongoose.Types.ObjectId(currentOwner),
       noOfRatings,
@@ -60,7 +45,6 @@ export const createProduct = async (req, res) => {
     });
   }
 };
-
 
 /**
  * Get product details by ID.
