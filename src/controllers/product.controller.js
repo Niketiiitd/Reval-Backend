@@ -1,5 +1,6 @@
-import mongoose from 'mongoose';
+// product.controller.js
 import Product from '../models/product.model.js';
+import Transaction from '../models/transaction.model.js';
 
 export const createProduct = async (req, res) => {
   try {
@@ -13,8 +14,6 @@ export const createProduct = async (req, res) => {
       images,
       bills,
       currentOwner,
-      noOfRatings,
-      rating,
     } = req.body;
 
     const newProduct = new Product({
@@ -26,9 +25,7 @@ export const createProduct = async (req, res) => {
       link,
       images,
       bills,
-      currentOwner: new mongoose.Types.ObjectId(currentOwner),
-      noOfRatings,
-      rating,
+      currentOwner,
     });
 
     await newProduct.save();
