@@ -12,13 +12,13 @@ configDotenv();
 
 const app = express();
 
+
+app.use(cookieParser());
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true,
 
 }));
-
-app.use(cookieParser());
 // Middleware to parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
