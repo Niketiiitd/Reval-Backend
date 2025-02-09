@@ -2,24 +2,21 @@
 import { ethers } from "ethers";
 import Product from "../models/Product.js";
 import Transaction from "../models/Transaction.js";
-import User from "../models/User.js";
+import abi from "../utils/CircularMarketplace.json";
+import User from "../models/user.js";
 
 // --- Configure your provider ---
 // For example, using Infura's WebSocket endpoint (replace YOUR_INFURA_PROJECT_ID accordingly)
 const provider = new ethers.providers.WebSocketProvider(
-  "wss://mainnet.infura.io/ws/v3/YOUR_INFURA_PROJECT_ID"
+    INFURA_ID
 );
 
 // --- Contract configuration ---
 // Replace with your deployed contract address
-const contractAddress = "YOUR_CONTRACT_ADDRESS";
+const contractAddress = "0x7a8654d4C516493dF2d72A0C38e828265056094f";
 
 // Define the ABI for the events you want to listen to
-const contractABI = [
-  "event ItemCreated(uint256 id, string name, uint256 price, address owner)",
-  "event ItemTransferred(uint256 id, address from, address to, uint256 price)",
-  "event ItemUpdated(uint256 id, string description, uint256 price)"
-];
+const contractABI = abi.abi;
 
 // Create a contract instance
 const circularMarketplace = new ethers.Contract(contractAddress, contractABI, provider);

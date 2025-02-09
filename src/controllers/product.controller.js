@@ -1,7 +1,6 @@
 // product.controller.js
-import Product from '../models/Product.js';
-import Transaction from '../models/Transaction.js';
-
+import Product from '../models/product.model.js';
+import Transaction from '../models/transaction.model.js';
 
 export const createProduct = async (req, res) => {
   try {
@@ -14,7 +13,7 @@ export const createProduct = async (req, res) => {
       link,
       images,
       bills,
-      currentOwner,
+      currentOwner = req._id,
     } = req.body;
 
     const newProduct = new Product({
