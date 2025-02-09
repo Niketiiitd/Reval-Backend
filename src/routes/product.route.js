@@ -26,6 +26,6 @@ router.route('/:id').put(verifyUserJWT, updateProduct);
 // Delete a product
 router.route('/:id').delete(verifyUserJWT, deleteProduct);
 
-route('/:id').get(getTransactionHistory);
+router.route('/:id').get(getTransactionHistory);
 
 export default router;
